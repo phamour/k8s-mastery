@@ -1,6 +1,8 @@
 # SA Frontend ignored files
 node_modules/
 **/sa-frontend/build/
+package-lock.json
+yarn.lock
 
 # SA Logic ignored files
 venv/
@@ -13,3 +15,5 @@ target/
 # IDE ignored files
 .idea/
 *.iml
+
+.DS_Store
