@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sa-webapp
+  labels:
+    app: sa-webapp
+spec:
+  selector:
+    matchLabels:
+      app: sa-webapp
+  replicas: 2
+  minReadySeconds: 60
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      name: sa-webapp
+      labels:
+        app: sa-webapp
+    spec:
+      containers:
+        - image: yipengh/sa-webapp:latest
+          imagePullPolicy: Always
+          name: sa-webapp
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SA_LOGIC_API_URL
+              value: http://sa-logic:5000
