@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sa-ingress
+  # annotations:
+  #   kubernetes.io/ingress.class: gloo
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /.*
+            pathType: Prefix
+            backend:
+              service:
+                name: sa-frontend-np
+                port:
+                  number: 80
+          - path: /sentiment
+            pathType: Prefix
+            backend:
+              service:
+                name: sa-webapp
+                port:
+                  number: 8080
